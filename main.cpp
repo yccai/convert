@@ -50,7 +50,6 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
    
     for (i=0; i<k; i++)
     {
-     //   cout<<input[i]<<endl;
         if (input[i].compare(end_of_molecule)==0)
         {N_molecules=N_molecules+1;
         }
@@ -77,9 +76,6 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
             
      }
     }
-   // for (i=0; i<N_molecules; i++)
-   //     cout<<i<<" "<<n_lines[i]<<endl;
-    
     
     
     
@@ -91,7 +87,6 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
         
         
     str=input[3+line_counter];
-   // cout<<str<<endl;
     stringstream stream(str);
     stream >>N_atoms[i];
     stream >>N_edges[i];
@@ -100,7 +95,6 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
       line_counter=line_counter+n_lines[i];
     }
     
-    cout<<"tot_numb_of_atoms = "<<total_number_of_atoms<<endl;
     
     list_of_all_labels = new char[total_number_of_atoms];
     number_labels = new int [total_number_of_atoms];
@@ -110,9 +104,6 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
     for (i=0; i<N_molecules; i++)
     {
         if (N_atoms[i]>max_el) max_el=N_atoms[i];
-    //cout<<i<<" N_atoms = "<<N_atoms[i]<<endl;
-    //cout<<i<<" N_edges = "<<N_edges[i]<<endl;
-    
     }
     cout<<max_el<<endl;
     
@@ -130,17 +121,13 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
             str=input[4+j+N_atoms[i]+line_counter];
             
             istringstream iss(str);
-            //string sub[3];
             for (int l=0; l<3; l++)
             {
                 iss>>sub_m[j][l];
-                //cout<<sub_m[j][l]<<' ';
                 iss.clear();
             }
-            // cout<<endl;
          
             if (sub_m[j][0]>1000) {f=f+1;
-              //  cout<<input[line_counter]<<endl;
                 break;
             }
             
@@ -149,19 +136,6 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
         
         line_counter=line_counter+n_lines[i];
 
-
-        /*cout<<i<<": "<<endl;
-        for (j=0; j<N_edges[i]; j++){
-            for (int l=0; l<3; l++)
-            {
-                cout<<sub_m[j][l]<<' ';
-                
-            }
-            cout<<endl;
-        }
-        cout<<endl;*/
-        
-        //cout<<input[line_counter]<<endl;
     }
 
     m_wrong = new int[f];
@@ -176,7 +150,6 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
             str=input[4+j+N_atoms[i]+line_counter];
 
             istringstream iss(str);
-            //string sub[3];
             for (int l=0; l<3; l++)
             {
                 iss>>sub_m[j][l];
@@ -188,15 +161,10 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
         
         
         line_counter=line_counter+n_lines[i];
-        
-        //cout<<input[line_counter]<<endl;
     }
 
-    for (i=0; i<lenght_m_w; i++){
-    cout<<m_wrong[i]<<" ";
-    }
-    cout<<endl;
     
+    //write true label values into file
     
     line_counter=0;
     int flag=0;
@@ -237,17 +205,13 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
             else
                 output_file_6<<0<<endl;
             
-        //if (str.compare("nonmutagen")==1)
-        //output_file_6<<0<<endl;
-      //  if (str.compare("nonmutagen")==1)
-         // else  output_file_6<<1<<endl;
         line_counter=line_counter+n_lines[i];
         }
     }
     output_file_6.close();
     
     
-    /*
+    // for each graph write number of edges and number of nodes into file
     
     int flag=0;
     ofstream output_file_1;
@@ -265,12 +229,12 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
     }
     output_file_1.close();
     
-    */
     
     
-  /*
+    
+  
 
-    //list of all labels
+    //write a file with list of all labels
     line_counter=0;
     k=0;
     cout<<"inside list of labels"<<endl;
@@ -297,16 +261,9 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
         }
         line_counter=line_counter+n_lines[i];
     }
+   
     
-    
-    
-    
-   // for (i=0; i<total_number_of_atoms; i++){
-  //  cout<<i<<' '<<list_of_all_labels[i]<<endl;
-   // }
-    
-    
-    //relabeling nodesfrom letters to numbers
+    //relabeling nodes from chemical elements to numbers
    
     k=1;
     number_labels[0]=k;
@@ -326,9 +283,6 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
         }
     }
 
-    
-    
-    
     ofstream output_file_2;
     output_file_2.open(output_file_name_2.c_str());
     if (output_file_2.is_open()==0){
@@ -349,16 +303,11 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
         }}
         output_file_2<<endl;
     }
-     cout<<"relabeling is finished"<<endl;
 
     output_file_2.close();
-  */
-  /*
-    for (i=0; i<total_number_of_atoms; i++){
-        cout<<i<<' '<<number_labels[i]<<endl;}
-    */
+  
     //find adjacency matrix
-   /*
+   
     ofstream output_file_3;
     ofstream output_file_4;
     ofstream output_file_5;
@@ -384,8 +333,7 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
    
     
     
-    
-     cout<<"go for adjacency matrix"<<endl;
+   
     
     line_counter=0;
     for (i=0; i<N_molecules; i++){
@@ -490,7 +438,7 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
        
         }
     }
-    */
+    
        /* cout<<i<<": "<<endl;
         for (j=0; j<N_edges[i]; j++){
          for (int l=0; l<3; l++)
@@ -505,8 +453,9 @@ void read_input_file(string input_file_name, string output_file_name_1, string o
         //cout<<input[line_counter]<<endl;
     
 
-    //output_file_3.close();
-    //output_file_4.close();
+    output_file_3.close();
+    output_file_4.close();
+    output_file_5.close();
     
 
 }
